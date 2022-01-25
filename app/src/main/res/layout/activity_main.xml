@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -23,11 +24,17 @@
             android:hint="add something :"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubtaskList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <EditText
             android:id="@+id/edtchekBoxTitle"
@@ -35,7 +42,10 @@
             android:layout_height="wrap_content"
             android:hint="title"
             android:textSize="15sp"
-            app:backgroundTint="@color/teal_700"/>
+            app:backgroundTint="@color/teal_700"
+            app:layout_constraintTop_toBottomOf="@id/rvSubtaskList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/tvAddSubTask"
@@ -46,8 +56,11 @@
             android:hint="+ Add ..."
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/edtchekBoxTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         subtaskAdapter= SubtaskAdapter(subTaskList)
         binding?.apply {
             rvSubtaskList.apply {
-                layoutManager= LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
+                layoutManager= LinearLayoutManager(this@MainActivity)
                 adapter=subtaskAdapter
 
             }
