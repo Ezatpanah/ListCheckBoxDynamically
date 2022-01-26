@@ -6,6 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezatpanah.listcheckboxdynamically.databinding.ActivityMainBinding
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Subtask title cannot be empty", Toast.LENGTH_LONG).show()
 
                 } else {
-                    subTaskList.add(SubtaskModel(edtchekBoxTitle.text.toString()))
+                    subTaskList.add(SubtaskModel(edtchekBoxTitle.text.toString(),false))
                     refreshRecyc()
                     edtchekBoxTitle.setText("")
                     Toast.makeText(this@MainActivity, "${subTaskList.size}", Toast.LENGTH_LONG).show()
@@ -52,8 +55,35 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        refreshRecyc()
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: EvenDelete) {
+        if (event.isConfirmed) {
+            refreshRecyc()
+        }
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null
     }
+
+
 }
